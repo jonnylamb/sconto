@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>IKEA Discount Calculator</title>
+</head>
+<body>
+  <h1>IKEA Discount Calculator</h1>
+
+  <p>I recently bought a new <a
+    href="http://www.ikea.com/it/it/catalog/products/40103100/">chair</a>
+    from IKEA. As a temporary promotion they were giving store cards with
+    20% of your total shop when you bought said chair. I bought some other
+    stuff too and knew it would be cheaper to use two shopping baskets: the
+    second utilizing the discount from the store card obtained from buying
+    the chair in the first. However, exactly what to put in which basket was
+    not obvious. I wrote this ugly page to work out the option with the
+    cheapest total.</p>
+
+  <h2>Discounted item</h2>
+
+  <label for="discountName">Name:</label>
+  <input type="text" id="discountedName" value="chair"><br>
+  <label for="discountedCost">Cost:</label>
+  <input type="text" id="discountedCost" value="130"><br>
+  <label for="discountedPercentage">Percentage discount:</label>
+  <input type="text" id="discountedPercentage" value="20"><br>
+
+  <h2>New item</h2>
+
+  <label for="itemName">Name:</label>
+  <input type="text" id="itemName" value="scissors"><br>
+  <label for="itemCost">Cost:</label>
+  <input type="text" id="itemCost" value="2"><br>
+  <input type="submit" id="itemSubmit" value="Add">
+
+  <h2>Conclusion</h2>
+
+  <p id="conclusionTotal">Total: 0.00</p>
+  <p id="conclusionCredit">Remaining credit: 0.00</p>
+
+  <h3>First basket</h3>
+
+  <p id="firstTotal">Total: 0.00</p>
+
+  <ul id="firstBasket"></ul>
+
+  <h3>Second basket</h3>
+
+  <p id="secondTotal">Total: 0.00</p>
+
+  <ul id="secondBasket"></ul>
+
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="sconto.js"></script>
+  <script>
+    var items = [];
+
+    $("#itemSubmit").on("click", function() {
+      var discounted = new Sconto.Item($("#discountedName").val(),
+        parseInt($("#discountedCost").val()),
+        parseInt($("#discountedPercentage").val()));
+
+      var item = new Sconto.Item($("#itemName").val(),
+        parseInt($("#itemCost").val()));
+      items.push(item);
+
+      result = Sconto.calculate(discounted, items);
+
+      $("#firstBasket").empty();
+      $("#secondBasket").empty();
+
+      result.one.forEach(function(item) {
+        $("#firstBasket").append($("<li>" + item.name + "</li>"));
+      });
+      result.two.forEach(function(item) {
+        $("#secondBasket").append($("<li>" + item.name + "</li>"));
+      });
+
+      $("#conclusionTotal").text("Total: " + result.total.toFixed(2));
+      $("#conclusionCredit").text("Remaining credit: " + result.remainingCredit.toFixed(2));
+      $("#firstTotal").text("Total: " + result.totalOne.toFixed(2));
+      $("#secondTotal").text("Total: " + result.totalTwo.toFixed(2));
+
+      $("#itemName").val("");
+      $("#itemCost").val("");
+    })
+  </script>
+</body>
+</html>
