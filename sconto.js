@@ -32,7 +32,7 @@ var Sconto = {
   },
 
   // thanks to http://codereview.stackexchange.com/questions/7001/better-way-to-generate-all-combinations
-  _combinations: function(items) {
+  combinations: function(items) {
     var fn = function(active, rest, others, arr) {
       if (active.length == 0 && rest.length == 0) {
         arr.push({ one: active, two: others });
@@ -64,7 +64,7 @@ var Sconto = {
     }
 
     // work out all different combinations
-    var options = this._combinations(otherItems);
+    var options = this.combinations(otherItems);
 
     // work out totals for each combination
     var best;
@@ -97,13 +97,5 @@ var Sconto = {
     });
 
     return best;
-  },
-
-  test: function() {
-    var discounted = new Item("million dollar chair", 130.00, 20);
-    var others = [
-      new Item("twentysix", 26.00),
-      new Item("one", 1.00)];
-    return calculate(discounted, others);
   }
 }
