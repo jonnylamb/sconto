@@ -51,6 +51,9 @@ var Sconto = {
   },
 
   calculate: function(discountedItem, otherItems) {
+    // y u do dis, some browsers?
+    window.console || (console = { error: function() {} });
+
     if (discountedItem.discount == 0) {
       console.error("discounted item isn't actually discounted");
       return;
