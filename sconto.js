@@ -67,7 +67,7 @@ var Sconto = {
     var options = this._combinations(otherItems);
 
     // work out totals for each combination
-    var best = undefined;
+    var best;
     _.each(options, function(option) {
       // add discounted item to every option's first cart
       option.one = [discountedItem].concat(option.one);
@@ -84,7 +84,7 @@ var Sconto = {
       option.totalTwo = Math.max(0, option.totalTwo - option.totalCredit);
       option.total = option.totalOne + option.totalTwo;
 
-      if (best == undefined) {
+      if (!best) {
         best = option;
       } else {
         if (option.total < best.total)
