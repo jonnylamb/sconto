@@ -51,10 +51,14 @@ var Sconto = {
   },
 
   calculate: function(discountedItem, otherItems) {
-    if (discountedItem.discount == 0)
-      throw { message: "discounted item isn't actually discounted" };
-    if (this._hasDiscountedItems(otherItems))
-      throw { message: "other items shouldn't contain any other discounted items" };
+    if (discountedItem.discount == 0) {
+      console.error("discounted item isn't actually discounted");
+      return;
+    }
+    if (this._hasDiscountedItems(otherItems)) {
+      console.error("other items shouldn't contain any other discounted items");
+      return;
+    }
 
     // work out all different combinations
     var options = this._combinations(otherItems);
