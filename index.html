@@ -51,6 +51,7 @@
   <ul id="secondBasket"></ul>
 
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="//underscorejs.org/underscore-min.js"></script>
   <script src="sconto.js"></script>
   <script>
     var items = [];
@@ -69,10 +70,10 @@
       $("#firstBasket").empty();
       $("#secondBasket").empty();
 
-      result.one.forEach(function(item) {
+      _.each(result.one, function(item) {
         $("#firstBasket").append($("<li>" + item.name + "</li>"));
       });
-      result.two.forEach(function(item) {
+      _.each(result.two, function(item) {
         $("#secondBasket").append($("<li>" + item.name + "</li>"));
       });
 

@@ -9,7 +9,7 @@ var Sconto = {
   },
 
   _hasDiscountedItems: function(items) {
-    items.forEach(function(item) {
+    _.each(items, function(item) {
       if (item.discount > 0)
         return true;
     });
@@ -18,7 +18,7 @@ var Sconto = {
 
   _totalPrice: function(items) {
     var total = 0.0;
-    items.forEach(function(item) {
+    _.each(items, function(item) {
       total += item.cost;
     });
     return total;
@@ -65,7 +65,7 @@ var Sconto = {
 
     // work out totals for each combination
     var best = undefined;
-    options.forEach(function(option) {
+    _.each(options, function(option) {
       // add discounted item to every option's first cart
       option.one = [discountedItem].concat(option.one);
 
