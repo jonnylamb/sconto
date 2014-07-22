@@ -25,7 +25,7 @@ var Sconto = {
   },
 
   _removeItem: function(items, item) {
-    var index = items.indexOf(item);
+    var index = _.indexOf(items, item);
     if (index > -1)
       items.splice(index, 1);
     return items;
