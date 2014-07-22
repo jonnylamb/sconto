@@ -57,11 +57,11 @@
 
     $("#itemSubmit").on("click", function() {
       var discounted = new Sconto.Item($("#discountedName").val(),
-        parseInt($("#discountedCost").val()),
-        parseInt($("#discountedPercentage").val()));
+        parseInt($("#discountedCost").val(), 10),
+        parseInt($("#discountedPercentage").val(), 10));
 
       var item = new Sconto.Item($("#itemName").val(),
-        parseInt($("#itemCost").val()));
+        parseInt($("#itemCost").val(), 10));
       items.push(item);
 
       result = Sconto.calculate(discounted, items);
