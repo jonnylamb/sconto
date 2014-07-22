@@ -4,7 +4,7 @@ var Sconto = {
     this.name = name;
     this.cost = cost;
     this.discount = discount;
-    if (typeof(discount) === 'undefined')
+    if (typeof discount === 'undefined')
       this.discount = 0;
   },
 
